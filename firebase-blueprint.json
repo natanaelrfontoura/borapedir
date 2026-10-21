@@ -1,0 +1,247 @@
+{
+  "entities": {
+    "Restaurant": {
+      "title": "Restaurant",
+      "description": "Configuração principal do restaurante, dados fiscais, certificado Sefaz e parâmetros de IA Agêntica",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "cnpj": { "type": "string" },
+        "address": { "type": "string" },
+        "city": { "type": "string" },
+        "taxRegime": { "type": "string" },
+        "sefazCertificateStatus": { "type": "string" },
+        "autonomousMenuOptimization": { "type": "boolean" },
+        "autonomousStockPurchase": { "type": "boolean" },
+        "autonomousChurnRecovery": { "type": "boolean" },
+        "dynamicTaxPricing": { "type": "boolean" },
+        "facebookPixelId": { "type": "string" },
+        "googlePixelId": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "cnpj"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Canais de serviço do restaurante (delivery, salão, retirada, whatsapp, voz)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "name": { "type": "string" },
+        "active": { "type": "boolean" },
+        "serviceFeePercent": { "type": "number" },
+        "avgPrepMinutes": { "type": "number" },
+        "activeOrdersCount": { "type": "number" }
+      },
+      "required": ["id", "type", "name", "active"]
+    },
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "Item do cardápio digital com precificação dinâmica, ficha técnica e score agêntico",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "cost": { "type": "number" },
+        "marginPercent": { "type": "number" },
+        "stockAvailable": { "type": "number" },
+        "conversionRate": { "type": "number" },
+        "aiPriorityScore": { "type": "number" },
+        "displayOrder": { "type": "number" },
+        "ncm": { "type": "string" },
+        "taxClassification2026": { "type": "string" },
+        "ibsRate": { "type": "number" },
+        "cbsRate": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["id", "name", "category", "price", "cost"]
+    },
+    "ComboOffer": {
+      "title": "ComboOffer",
+      "description": "Combo promocional do cardápio digital configurado pelo gerente ou sugerido pela IA",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "originalPrice": { "type": "number" },
+        "comboPrice": { "type": "number" },
+        "cost": { "type": "number" },
+        "savingsAmount": { "type": "number" },
+        "badge": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "servesCount": { "type": "number" }
+      },
+      "required": ["id", "name", "originalPrice", "comboPrice", "isActive"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Pedido unificado multicanal sincronizado com KDS, garçom e caixa",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "number" },
+        "channel": { "type": "string" },
+        "tableNumber": { "type": "string" },
+        "wristbandId": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "status": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "discountAmount": { "type": "number" },
+        "appliedPromotion": { "type": "string" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string" },
+        "nfceStatus": { "type": "string" },
+        "nfceProtocol": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "prepStartedAt": { "type": "string" },
+        "readyAt": { "type": "string" },
+        "dispatchedAt": { "type": "string" },
+        "driverName": { "type": "string" },
+        "deliveredAt": { "type": "string" },
+        "SyncStatus": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "channel", "status", "total", "createdAt"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Cliente unificado com histórico de pedidos, fidelidade e risco de churn",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "totalOrders": { "type": "number" },
+        "lifetimeValue": { "type": "number" },
+        "loyaltyPoints": { "type": "number" },
+        "cashbackBalance": { "type": "number" },
+        "usualOrderDescription": { "type": "string" },
+        "daysSinceLastOrder": { "type": "number" },
+        "churnRiskScore": { "type": "number" },
+        "lastRecoveryOffer": { "type": "string" },
+        "npsScore": { "type": "number" }
+      },
+      "required": ["id", "name", "phone"]
+    },
+    "InventoryItem": {
+      "title": "InventoryItem",
+      "description": "Insumo de estoque com previsão de demanda por IA e conexão Sefaz NF-e",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "unit": { "type": "string" },
+        "currentStock": { "type": "number" },
+        "minStock": { "type": "number" },
+        "unitCost": { "type": "number" },
+        "predictedDailyUsage": { "type": "number" },
+        "daysUntilDepletion": { "type": "number" },
+        "aiSuggestedOrderQty": { "type": "number" },
+        "supplier": { "type": "string" },
+        "lastInvoiceNumber": { "type": "string" }
+      },
+      "required": ["id", "name", "unit", "currentStock", "unitCost"]
+    },
+    "Recipe": {
+      "title": "Recipe",
+      "description": "Ficha técnica com composição de insumos, custo total e CMV",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "menuItemId": { "type": "string" },
+        "menuItemName": { "type": "string" },
+        "yieldPortions": { "type": "number" },
+        "totalIngredientCost": { "type": "number" },
+        "cmvPercent": { "type": "number" },
+        "targetCmvPercent": { "type": "number" },
+        "prepTimeMinutes": { "type": "number" }
+      },
+      "required": ["id", "menuItemId", "menuItemName", "totalIngredientCost"]
+    },
+    "FinancialRecord": {
+      "title": "FinancialRecord",
+      "description": "Registro financeiro de caixa, contas a pagar/receber, DRE e NFC-e",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "status": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "taxIbsAmount": { "type": "number" },
+        "taxCbsAmount": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "type", "category", "description", "amount", "createdAt"]
+    },
+    "AgentLog": {
+      "title": "AgentLog",
+      "description": "Registro de decisão autônoma executada pelos agentes de IA",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "agentName": { "type": "string" },
+        "actionType": { "type": "string" },
+        "summary": { "type": "string" },
+        "impactMetric": { "type": "string" },
+        "confidence": { "type": "number" },
+        "executedAt": { "type": "string" }
+      },
+      "required": ["id", "agentName", "summary", "executedAt"]
+    }
+  },
+  "firestore": {
+    "/restaurants/{restaurantId}": {
+      "schema": { "$ref": "#/entities/Restaurant" },
+      "description": "Configuração da unidade do restaurante"
+    },
+    "/services/{serviceId}": {
+      "schema": { "$ref": "#/entities/Service" },
+      "description": "Canais de atendimento"
+    },
+    "/menuItems/{itemId}": {
+      "schema": { "$ref": "#/entities/MenuItem" },
+      "description": "Cardápio digital dinâmico"
+    },
+    "/combos/{comboId}": {
+      "schema": { "$ref": "#/entities/ComboOffer" },
+      "description": "Combos promocionais do cardápio digital"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Pedidos em tempo real"
+    },
+    "/customers/{customerId}": {
+      "schema": { "$ref": "#/entities/Customer" },
+      "description": "Base unificada de clientes e fidelidade"
+    },
+    "/inventory/{inventoryId}": {
+      "schema": { "$ref": "#/entities/InventoryItem" },
+      "description": "Estoque preditivo de insumos"
+    },
+    "/recipes/{recipeId}": {
+      "schema": { "$ref": "#/entities/Recipe" },
+      "description": "Fichas técnicas e CMV"
+    },
+    "/financialRecords/{recordId}": {
+      "schema": { "$ref": "#/entities/FinancialRecord" },
+      "description": "Registros financeiros, DRE e NFC-e"
+    },
+    "/agentLogs/{logId}": {
+      "schema": { "$ref": "#/entities/AgentLog" },
+      "description": "Histórico de decisões autônomas da IA"
+    }
+  }
+}

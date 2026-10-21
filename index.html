@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <script>
+      // Ignore Vite HMR WebSocket errors as HMR is disabled in AI Studio iframe environment
+      window.addEventListener('unhandledrejection', function (event) {
+        if (
+          event.reason &&
+          ((typeof event.reason.message === 'string' &&
+            (event.reason.message.includes('WebSocket') || event.reason.message.includes('ws:'))) ||
+            (typeof event.reason.stack === 'string' && event.reason.stack.includes('@vite/client')))
+        ) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      });
+      window.addEventListener('error', function (event) {
+        if (
+          (typeof event.message === 'string' && event.message.includes('WebSocket')) ||
+          (typeof event.filename === 'string' && event.filename.includes('@vite/client'))
+        ) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      });
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexoRestô AI — Plataforma Agêntica de Gestão para Food Service</title>
+    <meta name="description" content="Sistema full-stack de gestão para restaurantes com IA Agêntica Decisória, atendimento multicanal (WhatsApp, QR Code, Salão, Voz), KDS em tempo real, estoque preditivo, ficha técnica, DRE e NFC-e Reforma Tributária 2026." />
+    <meta property="og:title" content="NexoRestô AI — Plataforma Agêntica de Gestão para Food Service" />
+    <meta property="og:description" content="Sistema full-stack de gestão para restaurantes com IA Agêntica Decisória, atendimento multicanal (WhatsApp, QR Code, Salão, Voz), KDS em tempo real, estoque preditivo, ficha técnica, DRE e NFC-e Reforma Tributária 2026." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#0B0D11] text-[#F3F4F6] antialiased selection:bg-[#EA580C]/30 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

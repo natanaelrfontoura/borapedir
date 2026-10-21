@@ -1,0 +1,10 @@
+{
+  "name": "BOBA PEDIR — Plataforma Agêntica de Gestão para Food Service",
+  "description": "Sistema full-stack de gestão para restaurantes com IA Agêntica Decisória, atendimento multicanal (WhatsApp, QR Code, Salão, Voz), KDS em tempo real, estoque preditivo, ficha técnica, DRE e NFC-e Reforma Tributária 2026.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

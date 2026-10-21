@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (
+          (request.auth.token.email == "natanaelrfontoura@gmail.com" && request.auth.token.email_verified == true) ||
+          (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+           get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'manager'])
+        );
+    }
+
+    // Users collection for RBAC
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Restaurant configuration
+    match /restaurants/{restaurantId} {
+      allow read, write: if true;
+    }
+
+    // Services channels
+    match /services/{serviceId} {
+      allow read, write: if true;
+    }
+
+    // Digital Menu Items (publicly readable and writable for menu updates, price management, availability)
+    match /menuItems/{itemId} {
+      allow read, write: if true;
+    }
+
+    // Promotional Combos (publicly readable and writable for combo deals, discounts, availability)
+    match /combos/{comboId} {
+      allow read, write: if true;
+    }
+
+    // Orders (readable, creatable, and updatable by customer, kitchen KDS, delivery and cashier)
+    match /orders/{orderId} {
+      allow read, write: if true;
+    }
+
+    // Customers & Loyalty
+    match /customers/{customerId} {
+      allow read, write: if true;
+    }
+
+    // Predictive Inventory
+    match /inventory/{inventoryId} {
+      allow read, write: if true;
+    }
+
+    // Technical Recipes (Ficha Técnica)
+    match /recipes/{recipeId} {
+      allow read, write: if true;
+    }
+
+    // Financial Records, DRE & Fiscal NFC-e
+    match /financialRecords/{recordId} {
+      allow read, write: if true;
+    }
+
+    // Autonomous AI Agent Decision Logs
+    match /agentLogs/{logId} {
+      allow read, write: if true;
+    }
+  }
+}
